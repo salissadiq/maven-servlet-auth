@@ -2,7 +2,7 @@
 <body>
 <div class="flex justify-center items-center h-screen mx-auto my-auto">
 	<div class="border w-[500px] px-10 py-5 rounded-lg">
-	<form action="login" method="post">
+	<form action="LoginController" method="post">
 		<div class="flex flex-col gap-7">
 			<input 
 			type="text" 
