@@ -7,6 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import com.salscodes.web.dao.UserDao;
+import com.salscodes.web.model.User;
 
 
 public class LoginController extends HttpServlet {
@@ -14,8 +18,20 @@ public class LoginController extends HttpServlet {
        
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		out.println("From login cont");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		UserDao userdao = new UserDao();
+		try {
+			userdao.connection();
+			User user = userdao.login(email, password);
+			PrintWriter out = response.getWriter();
+			out.println(user);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} 
+		
+		
 	}
 
 }
