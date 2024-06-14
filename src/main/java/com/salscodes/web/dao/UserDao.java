@@ -23,7 +23,7 @@ public class UserDao {
 		pst.setString(1, email);
 		pst.setString(2, password);
 		ResultSet rs =  pst.executeQuery();
-		if(rs.next()) {
+		if(rs.next()) {    
 			user.setId(rs.getInt("id"));
 			user.setFullName(rs.getString("fullName"));
 			user.setEmail(rs.getString("email"));

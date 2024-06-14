@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@include file="header.jsp" %>
 <body>
-	Home
+<div class="bg-green-300 flex justify-between items-center h-[70px] px-5">
+	<div class="font-semibold">Maven Auth</div>
+	<div>
+	<a href="logout.jsp">Logout</a>
+	</div>
+</div>
+<h2>Welcome ${user.getFullName() }</h2>
 </body>
 </html>

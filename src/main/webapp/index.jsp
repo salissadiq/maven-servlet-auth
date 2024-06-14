@@ -4,6 +4,7 @@
 	<div class="border w-[500px] px-10 py-5 rounded-lg">
 	<form action="LoginController" method="post">
 		<div class="flex flex-col gap-7">
+		<p class="text-red-500 font-medium">${message }</p>
 			<input 
 			type="text" 
 			name="email" 
