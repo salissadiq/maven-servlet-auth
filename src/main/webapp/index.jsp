@@ -1,4 +1,9 @@
 <%@include file="header.jsp" %>
+<%
+if(session.getAttribute("user") != null){
+	response.sendRedirect("home.jsp");
+}
+%>
 <body>
 <div class="flex justify-center items-center h-screen mx-auto my-auto">
 	<div class="border w-[500px] px-10 py-5 rounded-lg">
