@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import com.sals.PasswordEncriptionUtil;
 import com.salscodes.web.dao.UserDao;
 
 public class SignupController extends HttpServlet {
@@ -22,14 +23,15 @@ public class SignupController extends HttpServlet {
 		String fullName = request.getParameter("fullName");
 		String email = request.getParameter("email");
 		String pass = request.getParameter("password");
+		String encryptedPassword = PasswordEncriptionUtil.encryptPassword(pass);
 		
 		UserDao userdao = new UserDao();
 		
 		try {
 			userdao.connection();
-			boolean resp =  userdao.register(fullName, email, pass);
+			boolean resp =  userdao.register(fullName, email, encryptedPassword);
 			if(resp)
-				out.println("Succesfully registered!");
+				out.println("Successfully registered!");
 			else if(!resp)
 				out.println("Email already exist");
 		} catch (SQLException e) {

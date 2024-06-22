@@ -2,6 +2,7 @@ package com.salscodes.web.dao;
 
 import java.sql.*;
 
+import com.sals.PasswordEncriptionUtil;
 import com.salscodes.web.model.User;
 
 public class UserDao {
@@ -18,15 +19,17 @@ public class UserDao {
 	
 	public User login(String email, String password) throws ClassNotFoundException, SQLException {
 		User user = new User();
-		String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+		String query = "SELECT * FROM users WHERE email = ?";
 		PreparedStatement pst = conn.prepareStatement(query);
 		pst.setString(1, email);
-		pst.setString(2, password);
 		ResultSet rs =  pst.executeQuery();
 		if(rs.next()) {    
-			user.setId(rs.getInt("id"));
-			user.setFullName(rs.getString("fullName"));
-			user.setEmail(rs.getString("email"));
+			boolean passwordIsValid = PasswordEncriptionUtil.checkPassword(password, rs.getString("password"));
+			if(passwordIsValid) {
+				user.setId(rs.getInt("id"));
+				user.setFullName(rs.getString("fullName"));
+				user.setEmail(rs.getString("email"));
+			}
 		}
 		
 		return user;
