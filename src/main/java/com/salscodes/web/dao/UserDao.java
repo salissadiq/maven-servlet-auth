@@ -31,5 +31,28 @@ public class UserDao {
 		
 		return user;
 	}
+	
+	public boolean register(String fullName, String email, String password) throws SQLException {
+		
+		String checkUserQuery = "SELECT * FROM users WHERE email = ?";
+		String insertQuery = "INSERT INTO users (fullName, email, password) VALUES (?,?,?)";
+		
+		PreparedStatement pst = conn.prepareStatement(checkUserQuery);
+		pst.setString(1, email);
+		
+		ResultSet rs = pst.executeQuery();
+		
+		if(rs.next()) 
+			return false;
+		PreparedStatement prepareInsert = conn.prepareStatement(insertQuery);
+		prepareInsert.setString(1, fullName);
+		prepareInsert.setString(2, email);
+		prepareInsert.setString(3, password);
+		
+		if(prepareInsert.executeUpdate() > 0) {
+			return true;
+		}
+		return false;
+	}
 
 }
